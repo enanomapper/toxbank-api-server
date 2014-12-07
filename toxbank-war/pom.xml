@@ -78,15 +78,7 @@ Project service</description>
             <argLine>-Xmx1024m</argLine>
           </configuration>
         </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>tomcat-maven-plugin</artifactId>
-          <configuration>
-            <server>localhost</server>
-            <path>/toxbank</path>
-            <port>8080</port>
-          </configuration>
-        </plugin>
+       
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>2.1.1</version>
@@ -104,6 +96,42 @@ Project service</description>
             </archive>
           </configuration>
         </plugin>
+          <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat6-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+            <webXml>${web_xml}</webXml>
+            <!-- 
+        <manifest>
+          <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+        </manifest>
+         -->
+            <archive>
+              <manifestEntries>
+                <Implementation-Build>${build.version}</Implementation-Build>
+              </manifestEntries>
+            </archive>
+          </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+            <webXml>${web_xml}</webXml>
+            <!-- 
+        <manifest>
+          <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+        </manifest>
+         -->
+            <archive>
+              <manifestEntries>
+                <Implementation-Build>${build.version}</Implementation-Build>
+              </manifestEntries>
+            </archive>
+          </configuration>
+      </plugin>
       </plugins>
     </pluginManagement>
     <resources>
@@ -114,8 +142,24 @@ Project service</description>
     </resources>
   </build>
   <profiles>
-
-
+    <profile>
+      <id>toxbank</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+ 		<build>
+        <finalName>toxbank</finalName>
+      </build>  
+     </profile> 
+    <profile>
+      <id>enm</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+ 		<build>
+        <finalName>enmprotocol</finalName>
+      </build>  
+     </profile> 
     <profile>
       <id>http</id>
       <activation>
