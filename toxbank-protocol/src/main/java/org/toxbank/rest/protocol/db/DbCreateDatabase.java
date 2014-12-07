@@ -39,6 +39,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import net.idea.modbcum.i.config.Preferences;
 import net.idea.modbcum.i.exceptions.AmbitException;
@@ -229,7 +230,7 @@ public class DbCreateDatabase extends AbstractDBProcessor<String,String> {
                         if (line == null) break;
                         if (line.toUpperCase().startsWith("DELIMITER")) {
                             delimiter = line.substring(line.indexOf("DELIMITER")+10).trim();
-                            logger.debug(table.toString());
+                            logger.log(Level.FINE,table.toString());
                             //t.execute(table.toString());
                             table = new StringBuffer();                             
                             continue;
@@ -238,7 +239,7 @@ public class DbCreateDatabase extends AbstractDBProcessor<String,String> {
                         if (line.trim().toUpperCase().startsWith("END "+delimiter)) {
                             table.append("END");
                             int ok = t.executeUpdate(table.toString());
-                            logger.debug(table.toString());
+                            logger.log(Level.FINE,table.toString());
                             table = new StringBuffer();                            
                             continue;
                         }                        
@@ -249,10 +250,10 @@ public class DbCreateDatabase extends AbstractDBProcessor<String,String> {
                         table.append("\n");
                         if (line.indexOf(delimiter) >= 0) {
                             //t.addBatch(table.toString());
-                            logger.debug(table.toString());
+                            logger.log(Level.FINE,table.toString());
                             t.executeUpdate(table.toString());
                             
-                            logger.debug(table.toString());
+                            logger.log(Level.FINE,table.toString());
                             table = new StringBuffer();
                         }
 

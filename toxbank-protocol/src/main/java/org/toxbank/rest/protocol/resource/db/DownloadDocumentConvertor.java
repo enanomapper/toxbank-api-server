@@ -50,7 +50,8 @@ public class DownloadDocumentConvertor extends   AbstractObjectConvertor<DBProto
 		return null;
 	}
 	@Override
-	public Representation process(FileRepresentation doc) throws AmbitException {
+	public Representation processDoc(FileRepresentation doc)
+			throws AmbitException {
 		return doc;
 	}
 	

@@ -92,8 +92,9 @@ public class CallableUserCreator extends CallableDBUpdateTask<DBUser,Form,String
 	}
 
 	@Override
-	protected Object executeQuery(IQueryUpdate<Object, DBUser> query)
+	protected Object executeQuery(IQueryUpdate<? extends Object, DBUser> query)
 			throws Exception {
+
 		Object result = super.executeQuery(query);
 		if (Method.POST.equals(method)) {
 			DBUser user = query.getObject();

@@ -1,7 +1,6 @@
 package org.toxbank.rest.user.alerts.notification;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,20 +9,16 @@ import java.util.UUID;
 
 import net.idea.modbcum.i.IQueryCondition;
 import net.idea.modbcum.i.IQueryRetrieval;
-import net.idea.modbcum.i.exceptions.AmbitException;
 import net.idea.modbcum.i.exceptions.NotFoundException;
 import net.idea.modbcum.p.MasterDetailsProcessor;
 import net.idea.restnet.c.TaskApplication;
-import net.idea.restnet.c.exception.RResourceException;
 import net.idea.restnet.c.task.CallableProtectedTask;
-import net.idea.restnet.c.task.FactoryTaskConvertor;
 import net.idea.restnet.c.task.TaskCreator;
 import net.idea.restnet.c.task.TaskCreatorForm;
 import net.idea.restnet.db.DBConnection;
 import net.idea.restnet.db.QueryURIReporter;
 import net.idea.restnet.i.task.ICallableTask;
-import net.idea.restnet.i.task.ITaskStorage;
-import net.idea.restnet.i.task.Task;
+import net.idea.restnet.i.task.ITask;
 import net.toxbank.client.resource.Alert.RecurrenceFrequency;
 
 import org.restlet.Context;
@@ -87,7 +82,7 @@ public class NotificationResource<T> extends UserDBResource<T> {
 	} 
 
 	@Override
-	protected QueryURIReporter<DBUser, ReadUser<T>> getURUReporter(
+	protected QueryURIReporter<DBUser, ReadUser<T>> getURIReporter(
 			Request baseReference) throws ResourceException {
 		return new UserURIReporter(getRequest());
 	}
@@ -99,7 +94,7 @@ public class NotificationResource<T> extends UserDBResource<T> {
 		try {
 			UserURIReporter reporter = new UserURIReporter(getRequest(),"");
 			DBConnection dbc = new DBConnection(getApplication().getContext(),getConfigFile());
-			conn = dbc.getConnection(getRequest());
+			conn = dbc.getConnection();
 			CallableNotification callable = new CallableNotification(method,item,reporter, form,getRequest().getRootRef().toString(),conn,getToken());
 			callable.setNotification(new SimpleNotificationEngine());
 			return callable;
@@ -134,20 +129,20 @@ public class NotificationResource<T> extends UserDBResource<T> {
 				return createCallable(method,(Form)null,item);
 			}
 			@Override
-			protected Task<Reference, Object> createTask(
-					ICallableTask callable,
-					DBUser item) throws ResourceException {
+			protected ITask<Reference, Object> createTask(
+					ICallableTask callable, DBUser item)
+					throws ResourceException {
 					return addTask(callable, item,reference);
 				}
 			
 			@Override
 			public List<UUID> process(IQueryRetrieval<DBUser> query)
-					throws AmbitException {
+					throws Exception {
 
 				return super.process(query);
 			}
 			@Override
-			public Object processItem(DBUser item) throws AmbitException {
+			public Object processItem(DBUser item) throws Exception {
 
 				return super.processItem(item);
 			}
@@ -171,7 +166,7 @@ public class NotificationResource<T> extends UserDBResource<T> {
 	}
 	
 	@Override
-	protected Task<Reference, Object> addTask(ICallableTask callable,
+	protected ITask<Reference, Object> addTask(ICallableTask callable,
 			DBUser item, Reference reference) throws ResourceException {
 
 			if (item.getAlerts()==null) return null;

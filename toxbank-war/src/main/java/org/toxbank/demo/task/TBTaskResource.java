@@ -14,7 +14,7 @@ import net.idea.restnet.c.reporters.TaskHTMLReporter;
 import net.idea.restnet.c.resource.TaskResource;
 import net.idea.restnet.c.task.FactoryTaskConvertor;
 import net.idea.restnet.i.task.ITaskStorage;
-import net.idea.restnet.i.task.Task.TaskStatus;
+import net.idea.restnet.i.task.TaskStatus;
 
 import org.restlet.Request;
 import org.restlet.representation.Variant;

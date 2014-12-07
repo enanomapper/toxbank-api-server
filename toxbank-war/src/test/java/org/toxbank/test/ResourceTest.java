@@ -13,14 +13,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import junit.framework.Assert;
 import net.idea.modbcum.i.config.Preferences;
 import net.idea.restnet.c.ChemicalMediaType;
+import net.idea.restnet.c.task.ClientResourceWrapper;
+import net.idea.restnet.rdf.ns.OT;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.opentox.aa.opensso.OpenSSOToken;
-import org.opentox.dsl.task.ClientResourceWrapper;
 import org.opentox.dsl.task.RemoteTask;
-import org.opentox.rdf.OT;
 import org.restlet.Client;
 import org.restlet.Component;
 import org.restlet.Context;
@@ -140,8 +140,6 @@ public abstract class ResourceTest extends DbUnitTest {
 
 		Assert.assertEquals(Status.SUCCESS_OK, task.getStatus());
 		return task;
-		
-       
 	}
 	
 	public Reference testAsyncTask(String uri,Form form,Status expected, String uriExpected) throws Exception {

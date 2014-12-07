@@ -66,4 +66,9 @@ public class CreateProtocolVersion  extends AbstractObjectUpdate<DBProtocol> imp
 	public void getStoredProcedureOutVars(CallableStatement statement) throws SQLException {
 		getObject().setVersion(statement.getInt(f.length+1));
 	}
+	@Override
+	public void registerOutParameters(CallableStatement st)
+			throws SQLException {
+		st.registerOutParameter(6,java.sql.Types.INTEGER );
+	}
 }

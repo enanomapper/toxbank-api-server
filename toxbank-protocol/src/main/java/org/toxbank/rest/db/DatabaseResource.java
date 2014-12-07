@@ -174,7 +174,7 @@ public class DatabaseResource  extends QueryResource<DBVersionQuery,DBVersion> {
 		try {
     		DBConnection dbc = new DBConnection(getContext(),getConfigFile());
     	
-    		connection = dbc.getConnection(getRequest());
+    		connection = dbc.getConnection();
 			
 			st = connection.createStatement();
 			rs = st.executeQuery("show databases");

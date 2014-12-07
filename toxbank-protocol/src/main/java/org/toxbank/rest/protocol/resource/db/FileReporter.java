@@ -34,7 +34,7 @@ public class FileReporter extends QueryReporter<DBProtocol, IQueryRetrieval<DBPr
 	}
 
 	@Override
-	public Object processItem(DBProtocol item) throws AmbitException {
+	public Object processItem(DBProtocol item) throws Exception {
 		try {
 			File file = new File(item.getDocument().getResourceURL().toURI());
 			FileRepresentation filerepresentation = new FileRepresentation(file, new MediaType(item.getDocument().getMediaType()));
@@ -44,7 +44,7 @@ public class FileReporter extends QueryReporter<DBProtocol, IQueryRetrieval<DBPr
 			else filerepresentation.setDownloadName(item.getIdentifier());	
 			setOutput(filerepresentation);
 			return item;
-		} catch (URISyntaxException x) {
+		} catch (Exception x) {
 			throw new AmbitException(x);
 		}
 	}

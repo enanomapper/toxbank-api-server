@@ -115,7 +115,7 @@ public class TBHTMLBeauty extends HTMLBeauty {
 					getLoginLink(),
 					request.getClientInfo().getUser()==null?"Login":"My account"));
 			w.write("<span style='float:right;'>");
-			writeSearchForm(w, title, request, meta);
+			writeSearchForm(w, title, request, meta,Method.GET);
 			w.write("</span>\n");
 			w.write("</div>\n");
 			

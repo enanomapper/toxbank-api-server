@@ -4,10 +4,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.idea.restnet.aa.opensso.OpenSSOServicesConfig;
+import net.idea.restnet.c.task.ClientResourceWrapper;
+import net.idea.restnet.i.aa.IAuthToken;
 
 import org.opentox.aa.opensso.OpenSSOToken;
-import org.opentox.dsl.aa.IAuthToken;
-import org.opentox.dsl.task.ClientResourceWrapper;
 
 
 public abstract class ProtectedResourceTest extends ResourceTest implements IAuthToken  {

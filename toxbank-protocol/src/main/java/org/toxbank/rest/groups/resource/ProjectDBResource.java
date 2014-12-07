@@ -52,7 +52,7 @@ public class ProjectDBResource extends GroupDBResource<DBProject> {
 		try {
 			GroupQueryURIReporter r = new GroupQueryURIReporter(getRequest(),"");
 			DBConnection dbc = new DBConnection(getApplication().getContext(),getConfigFile());
-			conn = dbc.getConnection(getRequest());
+			conn = dbc.getConnection();
 			return new CallableGroupCreator(method,item,GroupType.PROJECT,user,r,form,getRequest().getRootRef().toString(), conn,getToken());
 		} catch (Exception x) {
 			try { conn.close(); } catch (Exception xx) {}

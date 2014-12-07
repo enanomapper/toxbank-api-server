@@ -49,7 +49,7 @@ public class UserJSONReporter <Q extends IQueryRetrieval<DBUser>>  extends Query
 	//output.write("Title,First name,Last name,user name,email,Keywords,Reviewer\n");
 
 	@Override
-	public Object processItem(DBUser user) throws AmbitException {
+	public Object processItem(DBUser user) throws Exception {
 		try {
 			if (comma!=null) getOutput().write(comma);
 			

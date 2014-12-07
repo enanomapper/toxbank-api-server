@@ -1,7 +1,5 @@
 package org.toxbank.rest.user.alerts.notification;
 
-import java.net.URL;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -11,7 +9,6 @@ import net.idea.modbcum.i.IQueryRetrieval;
 import net.idea.modbcum.i.query.IQueryUpdate;
 import net.idea.restnet.aa.opensso.OpenSSOServicesConfig;
 import net.idea.restnet.db.update.CallableDBUpdateTask;
-import net.toxbank.client.resource.Account;
 
 import org.opentox.aa.opensso.OpenSSOToken;
 import org.restlet.data.Form;

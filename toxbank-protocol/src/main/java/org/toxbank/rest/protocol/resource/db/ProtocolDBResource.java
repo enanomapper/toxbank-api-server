@@ -169,7 +169,7 @@ public class ProtocolDBResource<Q extends ReadProtocol> extends QueryResource<Q,
 	} 
 
 	@Override
-	protected QueryURIReporter<DBProtocol, Q> getURUReporter(
+	protected QueryURIReporter<DBProtocol, Q> getURIReporter(
 			Request baseReference) throws ResourceException {
 		return new ProtocolQueryURIReporter(getRequest());
 	}
@@ -211,12 +211,12 @@ public class ProtocolDBResource<Q extends ReadProtocol> extends QueryResource<Q,
 					super(context,configFile);
 				}
 				public String getDir() {
-					loadProperties();
-					return properties.getProperty("dir.protocol");
+					loadProperties(configFile);
+					return propertiesMap.get(configFile).getProperty("dir.protocol");
 				}
 			};
 			TDBConnection dbc = new TDBConnection(getApplication().getContext(),getConfigFile());
-			conn = dbc.getConnection(getRequest());
+			conn = dbc.getConnection();
 
 			String dir = dbc.getDir();
 			if ("".equals(dir)) dir = null;

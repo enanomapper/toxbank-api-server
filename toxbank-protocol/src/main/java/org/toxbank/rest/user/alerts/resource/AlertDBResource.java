@@ -170,7 +170,7 @@ public class AlertDBResource	extends QueryResource<ReadAlert,DBAlert> {
 	} 
 
 	@Override
-	protected QueryURIReporter<DBAlert, ReadAlert> getURUReporter(
+	protected QueryURIReporter<DBAlert, ReadAlert> getURIReporter(
 			Request baseReference) throws ResourceException {
 		return new AlertURIReporter(getRequest());
 	}
@@ -188,7 +188,7 @@ public class AlertDBResource	extends QueryResource<ReadAlert,DBAlert> {
 			DBUser user = getUser(getRequest().getAttributes().get(UserDBResource.resourceKey));
 			AlertURIReporter reporter = new AlertURIReporter(getRequest(),"");
 			DBConnection dbc = new DBConnection(getApplication().getContext(),getConfigFile());
-			conn = dbc.getConnection(getRequest());
+			conn = dbc.getConnection();
 			return new CallableAlertCreator(method,item,
 					user,
 					reporter, form,getRequest().getRootRef().toString(),conn,getToken());

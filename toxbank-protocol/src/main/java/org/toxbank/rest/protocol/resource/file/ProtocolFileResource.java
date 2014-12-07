@@ -35,7 +35,7 @@ public class ProtocolFileResource extends FileResource<Protocol> {
 		new ProtocolURIReporter(getRequest(),getDocumentation());
 	}
 	@Override
-	protected Reporter createHTMLReporter() {
+	protected Reporter createHTMLReporter(boolean headles) {
 		return new ProtocolHTMLReporter(getRequest(),getDocumentation());
 	}
 	@Override

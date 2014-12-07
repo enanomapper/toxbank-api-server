@@ -89,10 +89,4 @@ public class CallableAlertCreator extends CallableDBUpdateTask<DBAlert,Form,Stri
 		return reporter.getURI(alert);
 	}
 
-	@Override
-	protected Object executeQuery(IQueryUpdate<Object, DBAlert> q)
-			throws Exception {
-		return super.executeQuery(q);
-	}
-
 }

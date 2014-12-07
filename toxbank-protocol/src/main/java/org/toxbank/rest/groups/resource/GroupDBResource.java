@@ -146,7 +146,7 @@ public abstract class GroupDBResource<G extends IDBGroup>	extends QueryResource<
 	} 
 
 	@Override
-	protected QueryURIReporter<G, ReadGroup<G>> getURUReporter(
+	protected QueryURIReporter<G, ReadGroup<G>> getURIReporter(
 			Request baseReference) throws ResourceException {
 		return new GroupQueryURIReporter(getRequest());
 	}

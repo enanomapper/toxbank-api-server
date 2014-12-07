@@ -60,12 +60,12 @@ public class ProtocolPublicationResource extends ProtocolDocumentResource {
 					super(context,configFile);
 				}
 				public String getDir() {
-					loadProperties();
-					return properties.getProperty("dir.protocol");
+					loadProperties(configFile);
+					return propertiesMap.get(configFile).getProperty("dir.protocol");
 				}
 			};
 			TDBConnection dbc = new TDBConnection(getApplication().getContext(),getConfigFile());
-			conn = dbc.getConnection(getRequest());
+			conn = dbc.getConnection();
 
 			String dir = dbc.getDir();
 			if ("".equals(dir)) dir = null;

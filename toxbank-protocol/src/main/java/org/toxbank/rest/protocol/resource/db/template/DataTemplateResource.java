@@ -1,7 +1,6 @@
 package org.toxbank.rest.protocol.resource.db.template;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class DataTemplateResource extends ProtocolDocumentResource {
 					File file = new File(item.getDataTemplate().getResourceURL().toURI());
 					setOutput(new FileRepresentation(file,MediaType.TEXT_ALL));
 					return item;
-				} catch (URISyntaxException x) {
+				} catch (Exception x) {
 					throw new AmbitException(x);
 				}
 			}
@@ -65,7 +64,7 @@ public class DataTemplateResource extends ProtocolDocumentResource {
 	
 
 	@Override
-	protected QueryURIReporter<DBProtocol, IQueryRetrieval<DBProtocol>> getURUReporter(
+	protected QueryURIReporter<DBProtocol, IQueryRetrieval<DBProtocol>> getURIReporter(
 			Request baseReference) throws ResourceException {
 		return new ProtocolQueryURIReporter(getRequest());
 	}
@@ -93,12 +92,12 @@ public class DataTemplateResource extends ProtocolDocumentResource {
 					super(context,configFile);
 				}
 				public String getDir() {
-					loadProperties();
-					return properties.getProperty("dir.protocol");
+					loadProperties(configFile);
+					return propertiesMap.get(configFile).getProperty("dir.protocol");
 				}
 			};
 			TDBConnection dbc = new TDBConnection(getApplication().getContext(),getConfigFile());
-			conn = dbc.getConnection(getRequest());
+			conn = dbc.getConnection();
 
 			String dir = dbc.getDir();
 			if ("".equals(dir)) dir = null;

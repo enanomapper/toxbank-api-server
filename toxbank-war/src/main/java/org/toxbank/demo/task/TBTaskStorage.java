@@ -10,6 +10,8 @@ import net.idea.restnet.aa.opensso.policy.CallablePolicyCreator;
 import net.idea.restnet.aa.opensso.policy.PolicyProtectedTask;
 import net.idea.restnet.c.task.TaskStorage;
 import net.idea.restnet.i.task.ICallableTask;
+import net.idea.restnet.i.task.ITask;
+import net.idea.restnet.i.task.ITaskResult;
 import net.idea.restnet.i.task.Task;
 import net.idea.restnet.i.task.TaskResult;
 
@@ -47,10 +49,10 @@ public class TBTaskStorage extends TaskStorage<String> {
 		super.shutdown(timeout, unit);
 	}
 
-	
 	@Override
-	protected Task<TaskResult, String> createTask(String user,ICallableTask callable) {
-		
+	protected ITask<ITaskResult, String> createTask(String user,
+			ICallableTask callable) {
+	
 		return new PolicyProtectedTask(user,!(callable instanceof CallablePolicyCreator)) {
 			@Override
 			public synchronized void setPolicy() throws Exception {
