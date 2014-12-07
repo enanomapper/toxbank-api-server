@@ -377,10 +377,64 @@
       </build>
     </profile>
     <profile>
+      <id>enm</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <finalName>enmprotocol</finalName>
+      </build>
+	<properties>
+       <!-- After deployment, these settings could be found (and modified) in {servlet-container}/webapps/{this-app}/WEB-INF/conf/tbprotocol-db.pref -->
+        <!-- The host where MySQL is running -->
+        <toxbank.db.host>localhost</toxbank.db.host>
+        <!-- The database name -->
+        <toxbank.db>enmprotocol</toxbank.db>
+        <!-- The user name -->
+        <toxbank.db.user>guest</toxbank.db.user>
+        <toxbank.db.user.password>guest</toxbank.db.user.password>
+        <!-- The folder where protocol files are stored -->
+        <toxbank.dir.protocol />
+        <!-- How to serialize RDF - by Jena or StAX  jena|stax -->
+        <rdf.writer>stax</rdf.writer>
+        <!-- Protect /admin resource by AA -->
+        <tb.aa.admin>false</tb.aa.admin>
+        <!-- Not used in TB so far -->
+        <service.ontology>none-so-far</service.ontology>
+        <!-- Not used in TB so far -->
+        <license.intextfiles>false</license.intextfiles>
+        <!-- Not used in TB so far -->
+        <aa.admin>false</aa.admin>
+
+        <!-- Used in surefire tests only-->
+        <!-- Database for tests -->
+        <toxbank.db.test>enmp-test</toxbank.db.test>
+        <!-- DB user for tests -->
+        <toxbank.db.user.test>guest</toxbank.db.user.test>
+        <!-- DB password for tests -->
+        <toxbank.db.user.password.test>guest</toxbank.db.user.password.test>
+        <!-- used to create the DB in tests - not necessary, if the test DB exists 
+			<toxbank.db.user.root.password></toxbank.db.user.root.password>
+			-->
+        <!-- Alerts configuration -->
+        <!-- TODO specify default values if posuble -->
+        <alert.admin.email />
+        <alert.search.service.url />
+        <alert.ui.service.url />
+        <alert.mail.transport.protocol />
+        <alert.mail.host>localhost</alert.mail.host>
+        <alert.mail.user />
+        <alert.mail.debug />	
+	</properties>      
+    </profile>    
+    <profile>
       <id>toxbank</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
+ 		<build>
+        <finalName>toxbank</finalName>
+      </build>      
       <properties>
         <!-- After deployment, these settings could be found (and modified) in {servlet-container}/webapps/{this-app}/WEB-INF/conf/tbprotocol-db.pref -->
         <!-- The host where MySQL is running -->
