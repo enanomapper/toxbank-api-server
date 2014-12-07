@@ -24,6 +24,7 @@ import org.restlet.Server;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.ClientInfo;
 import org.restlet.data.Protocol;
+import org.restlet.ext.freemarker.ContextTemplateLoader;
 import org.restlet.resource.Directory;
 import org.restlet.resource.Finder;
 import org.restlet.routing.Filter;
@@ -50,6 +51,11 @@ import org.toxbank.rest.user.UserRouter;
 import org.toxbank.rest.user.alerts.notification.NotificationResource;
 import org.toxbank.rest.user.alerts.resource.AlertRouter;
 import org.toxbank.rest.user.resource.MyAccountResource;
+
+import freemarker.cache.MultiTemplateLoader;
+import freemarker.cache.TemplateLoader;
+import freemarker.template.Configuration;
+import freemarker.template.ObjectWrapper;
 
 
 /**
@@ -108,6 +114,7 @@ public class TBApplication extends FreeMarkerApplication<String> {
 
 	@Override
 	public Restlet createInboundRoot() {
+		initFreeMarkerConfiguration();
 		aaenabled = isProtected();
 		Router router = new MyRouter(this.getContext());
 		//router.attach("/help", AmbitResource.class);
@@ -409,6 +416,7 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		 Directory jmeDir = new Directory(getContext(), "war:///jme");
 		 Directory styleDir = new Directory(getContext(), "war:///style");
 		 Directory jquery = new Directory(getContext(), "war:///jquery");
+		 Directory scripts = new Directory(getContext(), "war:///scripts");
 
 		 
 		 router.attach("/meta/", metaDir);
@@ -416,6 +424,7 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		 router.attach("/jmol/", jmolDir);
 		 router.attach("/jme/", jmeDir);
 		 router.attach("/jquery/", jquery);
+		 router.attach("/scripts/", scripts);
 		 router.attach("/style/", styleDir);
 		 router.attach("/favicon.ico", FavIconResource.class);
 		 router.attach("/favicon.png", FavIconResource.class);

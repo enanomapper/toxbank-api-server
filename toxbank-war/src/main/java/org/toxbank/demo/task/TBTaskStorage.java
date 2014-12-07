@@ -27,8 +27,8 @@ public class TBTaskStorage extends TaskStorage<String> {
 			@Override
 			public void run() {
 				try {
-					String task = notifier.call();
-					logger.log(Level.INFO, task);
+					//String task = notifier.call();
+					//logger.log(Level.INFO, task);
 				} catch (Exception x) {
 					logger.log(Level.SEVERE, "Error launching notifications!", x);
 				}

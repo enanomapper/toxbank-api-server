@@ -193,6 +193,8 @@ public class NotificationResource<T> extends UserDBResource<T> {
 	@Override
 	protected Representation post(Representation entity, Variant variant)
 			throws ResourceException {
+		return null;
+		/*
 		try {
 			params = entity.isAvailable()?new Form(entity):null;
 		} catch (Exception x) {
@@ -208,6 +210,7 @@ public class NotificationResource<T> extends UserDBResource<T> {
 				} else throw x;
 			}
 		}
+		*/
 	}
 	
 	

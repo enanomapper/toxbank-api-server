@@ -48,9 +48,9 @@ public class TBHTMLBeauty extends HTMLBeauty {
 			"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">"
 		};
 		private final static String[] js = new String[] {
-			"<script type='text/javascript' src='%s/jquery/jquery-1.8.2.js'></script>\n",
-			"<script type='text/javascript' src='%s/jquery/jquery-ui-1.9.1.custom.min.js'></script>\n",
-			"<script type='text/javascript' charset='utf8' src='%s/jquery/jquery.dataTables-1.9.0.min.js'></script>\n",
+			"<script type='text/javascript' src='%s/jquery/jquery-1.10.2.js'></script>\n",
+			"<script type='text/javascript' src='%s/jquery/jquery-ui-1.10.4.custom.min.js'></script>\n",
+			"<script type='text/javascript' charset='utf8' src='%s/jquery/jquery.dataTables-1.9.4.min.js'></script>\n",
 			"<script type='text/javascript' charset='utf8' src='%s/jquery/jquery.layout-latest.min.js'></script>\n",
 			"<script type='text/javascript'>$(document).ready(function() { $('.datatable').dataTable({ \"bJQueryUI\": true});} )</script>\n",
 			"<script type='text/javascript'>$(document).ready(function() { $('body').layout({south__size:32,south__spacing_open:0,north__size:66,north__spacing_open:0});} )</script>\n"
