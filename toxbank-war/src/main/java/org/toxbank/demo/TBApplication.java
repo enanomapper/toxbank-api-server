@@ -2,6 +2,8 @@ package org.toxbank.demo;
 
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.Date;
+import java.util.Hashtable;
 import java.util.Properties;
 
 import net.idea.modbcum.i.config.Preferences;
@@ -9,7 +11,6 @@ import net.idea.restnet.aa.opensso.OpenSSOAuthenticator;
 import net.idea.restnet.aa.opensso.OpenSSOAuthorizer;
 import net.idea.restnet.aa.opensso.OpenSSOVerifierSetUser;
 import net.idea.restnet.c.ChemicalMediaType;
-import net.idea.restnet.c.TaskApplication;
 import net.idea.restnet.c.freemarker.FreeMarkerApplication;
 import net.idea.restnet.c.routers.MyRouter;
 import net.idea.restnet.c.task.TaskStorage;
@@ -24,7 +25,6 @@ import org.restlet.Server;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.ClientInfo;
 import org.restlet.data.Protocol;
-import org.restlet.ext.freemarker.ContextTemplateLoader;
 import org.restlet.resource.Directory;
 import org.restlet.resource.Finder;
 import org.restlet.routing.Filter;
@@ -52,11 +52,6 @@ import org.toxbank.rest.user.alerts.notification.NotificationResource;
 import org.toxbank.rest.user.alerts.resource.AlertRouter;
 import org.toxbank.rest.user.resource.MyAccountResource;
 
-import freemarker.cache.MultiTemplateLoader;
-import freemarker.cache.TemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
-
 
 /**
  * AMBIT implementation of OpenTox REST services as described in http://opentox.org/development/wiki/
@@ -71,14 +66,22 @@ import freemarker.template.ObjectWrapper;
  */
 public class TBApplication extends FreeMarkerApplication<String> {
 	public static final String _AAENABLED_PROPERTY = "toxbank.protected";
+	protected Hashtable<String,Properties> properties = new Hashtable<String, Properties>();
 	protected boolean aaenabled = false;
+	static final String version = "ambit.version";
+	static final String version_build = "ambit.build";
+	static final String version_timestamp = "ambit.build.timestamp";
+	static final String googleAnalytics = "google.analytics";
+	static final String protocolProperties = "org/toxbank/rest/config/toxbank.properties";
 	public TBApplication() {
 		super();
 		setName("Toxbank REST services (demo)");
 		setDescription("Toxbank REST services (demo)");
 		setOwner("Ideaconsult Ltd.");
 		setAuthor("Ideaconsult Ltd.");		
-
+		versionShort = readVersionShort();
+		versionLong = readVersionLong();
+		gaCode = readGACode();
 		
 		/*
 		String tmpDir = System.getProperty("java.io.tmpdir");
@@ -110,8 +113,43 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		
 	}
 
+	protected synchronized String getProperty(String name,String config)  {
+		try {
+			Properties p = properties.get(config);
+			if (p==null) {
+				p = new Properties();
+				InputStream in = this.getClass().getClassLoader().getResourceAsStream(config);
+				p.load(in);
+				in.close();
+				properties.put(config,p);
+			}
+			return p.getProperty(name);
 
+		} catch (Exception x) {
+			return null;
+		}
+	}	
+	public synchronized String readVersionShort()  {
+		try {
+			return getProperty(version,protocolProperties);
+		} catch (Exception x) {return "Unknown"; }
+	}
 
+	public synchronized String readVersionLong()  {
+		try {
+			String v1 = getProperty(version,protocolProperties);
+			String v2 = getProperty(version_build,protocolProperties);
+			String v3 = getProperty(version_timestamp,protocolProperties);
+			return String.format("%s r%s built %s",v1,v2,new Date(Long.parseLong(v3)));
+		} catch (Exception x) {return "Unknown"; }
+	}
+	public synchronized String readGACode()  {
+		try {
+			String ga = getProperty(googleAnalytics,protocolProperties);
+			if ("".equals(ga)) return null;
+			return ga;
+		} catch (Exception x) {return null; }
+	}
 	@Override
 	public Restlet createInboundRoot() {
 		initFreeMarkerConfiguration();
@@ -197,11 +235,9 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		 *  API extensions from this point on
 		 */
 
-		
-		/**  /bookmark  */
-		//router.attach(BookmarkResource.resource,createBookmarksRouter());				
+		router.attach("/api-docs",new APIDocsRouter(getContext()));
+		/** 
 	
-		/**
 		 * Images, styles, favicons, applets
 		 */
 		attachStaticResources(router);
@@ -535,5 +571,18 @@ class OpenSSOAuthorizerRIAP extends OpenSSOAuthorizer {
 	@Override
 	protected boolean authorize(Request request, Response response) {
 		return Protocol.RIAP.equals(request.getProtocol())?true:super.authorize(request, response);
+	}
+}
+
+class APIDocsRouter extends MyRouter {
+
+	public APIDocsRouter(Context context) {
+		super(context);
+		init();
+	}
+	protected void init() {
+		attachDefault(APIdocsResource.class);
+		attach("/{key1}", APIdocsResource.class);
+		attach("/{key1}/{key2}", APIdocsResource.class);
 	}
 }

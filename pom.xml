@@ -392,6 +392,7 @@
         <finalName>enmprotocol</finalName>
       </build>
 	<properties>
+	   <protocol.profile>enm</protocol.profile>
        <!-- After deployment, these settings could be found (and modified) in {servlet-container}/webapps/{this-app}/WEB-INF/conf/tbprotocol-db.pref -->
         <!-- The host where MySQL is running -->
         <toxbank.db.host>localhost</toxbank.db.host>
@@ -443,6 +444,7 @@
         <finalName>toxbank</finalName>
       </build>      
       <properties>
+      <protocol.profile>toxbank</protocol.profile>
         <!-- After deployment, these settings could be found (and modified) in {servlet-container}/webapps/{this-app}/WEB-INF/conf/tbprotocol-db.pref -->
         <!-- The host where MySQL is running -->
         <toxbank.db.host>localhost</toxbank.db.host>
