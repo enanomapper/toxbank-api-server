@@ -10,6 +10,7 @@ import net.idea.restnet.aa.opensso.OpenSSOAuthorizer;
 import net.idea.restnet.aa.opensso.OpenSSOVerifierSetUser;
 import net.idea.restnet.c.ChemicalMediaType;
 import net.idea.restnet.c.TaskApplication;
+import net.idea.restnet.c.freemarker.FreeMarkerApplication;
 import net.idea.restnet.c.routers.MyRouter;
 import net.idea.restnet.c.task.TaskStorage;
 import net.toxbank.client.Resources;
@@ -62,7 +63,7 @@ import org.toxbank.rest.user.resource.MyAccountResource;
  * http://stackoverflow.com/questions/810171/how-to-read-context-parameters-from-a-restlet
  *
  */
-public class TBApplication extends TaskApplication<String> {
+public class TBApplication extends FreeMarkerApplication<String> {
 	public static final String _AAENABLED_PROPERTY = "toxbank.protected";
 	protected boolean aaenabled = false;
 	public TBApplication() {
