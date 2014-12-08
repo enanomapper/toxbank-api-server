@@ -72,6 +72,7 @@ public class TBApplication extends FreeMarkerApplication<String> {
 	static final String version_build = "ambit.build";
 	static final String version_timestamp = "ambit.build.timestamp";
 	static final String googleAnalytics = "google.analytics";
+	public static final String ALLOWED_ORIGINS = "allowed.origins";
 	static final String protocolProperties = "org/toxbank/rest/config/toxbank.properties";
 	public TBApplication() {
 		super();
@@ -255,7 +256,7 @@ public class TBApplication extends FreeMarkerApplication<String> {
 	     TBApplication.printRoutes(router,">",w);
 	     System.out.println(w.toString());
 		 */
-		 return router;
+		 return addOriginFilter(router);
 	}
 	protected Restlet createOpenSSOVerifiedResource(Restlet next) {
 		Filter userAuthn = new OpenSSOAuthenticator(getContext(),!aaenabled,"opentox.org",new OpenSSOVerifierSetUser(false));
@@ -564,7 +565,23 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		}
 		return false;
 	}   	
-
+	protected synchronized String getAllowedOrigins()  {
+		try {
+			return getProperty(ALLOWED_ORIGINS,protocolProperties);
+		} catch (Exception x) {return null; }
+	}   	
+	protected Restlet addOriginFilter(Restlet router) {
+ 		 String allowedOrigins = getAllowedOrigins();
+	     getLogger().info("CORS: Origin filter attached:\t"+allowedOrigins);			
+		 OriginFilter originFilter = new OriginFilter(getContext(),allowedOrigins); 
+		 originFilter.setNext(router); 
+		 /*
+		 StringWriter w = new StringWriter();
+		 printRoutes(router,"\t",w);
+		 System.out.println(w);
+		 */		 
+		 return originFilter;
+	}
 }
 
 class OpenSSOAuthorizerRIAP extends OpenSSOAuthorizer {
