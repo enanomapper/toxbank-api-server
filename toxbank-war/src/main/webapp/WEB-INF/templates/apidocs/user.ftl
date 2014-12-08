@@ -6,30 +6,30 @@
         "application/rdf+xml",
         "text/uri-list"
     ],
-    "resourcePath": "/protocol",
+    "resourcePath": "/user",
     "apis": [
         {
-            "path": "/protocol",
+            "path": "/user",
             "operations": [
                 {
                     "method": "GET",
-                    "summary": "Returns all protocols",
-                    "notes": "Returns all protocols <a href='http://api.toxbank.net/index.php/Protocol#GET:_Retrieve_the_list_of_Protocols' target='opentox'>Protocol API</a>",
-                    "type": "Protocol",
-                    "nickname": "getAllProtocols",
+                    "summary": "Retrieve list of users",
+                    "notes": "Retrieve list of users <a href='http://api.toxbank.net/index.php/User' target='opentox'>User API</a>",
+                    "type": "User",
+                    "nickname": "getAllUsers",
                      <#include "/apidocs/authz.ftl" >
                     "parameters": [
                         {
                             "name": "search",
-                            "description": "Protocol name",
+                            "description": "prefix_of_firstname_or_lastname",
                             "required": false,
                             "type": "string",
                             "paramType": "query",
                             "allowMultiple": false
                         },		
                         	                                    {
-                            "name": "modifiedSince",
-                            "description": "timestamp",
+                            "name": "username",
+                            "description": "user name",
                             "required": false,
                             "type": "long",
                             "paramType": "query",
@@ -40,7 +40,7 @@
                     "responseMessages": [
                         {
                             "code": 404,
-                            "message": "Protocol not found"
+                            "message": "User not found"
                         },
 						<#include "/apidocs/error_500.ftl" >	                        
                     ]
@@ -48,19 +48,19 @@
             ]
         },
  		{
-            "path": "/protocol/{id}",
+            "path": "/user/{id}",
             "operations": [
                 {
                     "method": "GET",
-                    "summary": "Retrieve Metadata of a single Protocol",
-                    "notes": "Retrieve Metadata of a single Protocol <a href='http://opentox.org/dev/apis/api-1.2/AsyncTask' target='opentox'>Protocol API</a>",
-                    "type": "Protocol",
-                    "nickname": "getProtocolID",
+                    "summary": "Retrieve user details",
+                    "notes": "Retrieve user details <a href='http://api.toxbank.net/index.php/User' target='opentox'>User API</a>",
+                    "type": "User",
+                    "nickname": "getUserID",
                      <#include "/apidocs/authz.ftl" >
                     "parameters": [
                         {
                             "name": "id",
-                            "description": "Protocol identifier",
+                            "description": "User identifier",
                             "required": false,
                             "type": "string",
                             "paramType": "path",
@@ -78,23 +78,23 @@
                 },
                 {
                     "method": "POST",
-                    "summary": "Retrieve Metadata of a single Protocol",
-                    "notes": "Retrieve Metadata of a single Protocol <a href='http://opentox.org/dev/apis/api-1.2/AsyncTask' target='opentox'>Protocol API</a>",
+                    "summary": "Creates an user",
+                    "notes": "Creates an user <a href='http://api.toxbank.net/index.php/User' target='opentox'>User API</a>",
                     "type": "Task",
-                    "nickname": "uploadProtocol",
+                    "nickname": "createUser",
 					"consumes": [
-		                       "multipart/form-data"
+		                       "application/x-www-form-urlencoded"
 		                ],			                    
      				 <#include "/apidocs/authz.ftl" >
                     "parameters": [
 							{
-							    "name": "filename",
-							    "description": "File to upload",
+							    "name": "username",
+							    "description": "username",
 							    "required": true,
-							    "type": "File",
+							    "type": "string",
 							    "paramType": "form",
-							    "allowMultiple": true
-							},
+							    "allowMultiple": false
+							},	
 							{
 							    "name": "title",
 							    "description": "title",
@@ -102,65 +102,53 @@
 							    "type": "string",
 							    "paramType": "form",
 							    "allowMultiple": false
-							},	
-							                   							{
-							    "name": "anabstract",
-							    "description": "abstract",
-							    "required": true,
-							    "type": "string",
-							    "paramType": "form",
-							    "allowMultiple": false
 							},
 							{
-							    "name": "author_uri",
-							    "description": "author_uri",
-							    "required": true,
-							    "type": "string",
-							    "paramType": "form",
-							     "defaultValue" : "${ambit_root}/user/U1",
-							    "allowMultiple": true
-							},
-							{
-							    "name": "keywords",
-							    "description": "keywords",
+							    "name": "firstname",
+							    "description": "firstname",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
 							    "allowMultiple": true
 							},
 							{
-							    "name": "summarySearchable",
-							    "description": "summarySearchable",
+							    "name": "lastname",
+							    "description": "lastname",
+							    "required": true,
+							    "type": "string",
+							    "paramType": "form",
+							    "allowMultiple": true
+							},
+							{
+							    "name": "institute",
+							    "description": "institute",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
 							    "allowMultiple": false
 							},		
 							{
-							    "name": "project_uri",
-							    "description": "project_uri",
+							    "name": "weblog",
+							    "description": "weblog",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
-							     "defaultValue" : "${ambit_root}/project/G1",
 							    "allowMultiple": true
 							},	
 							{
-							    "name": "organisation_uri",
-							    "description": "organisation_uri",
+							    "name": "homepage",
+							    "description": "homepage",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
-							    "defaultValue" : "${ambit_root}/organisation/G1",
 							    "allowMultiple": false
 							},	
 							{
-							    "name": "user_uri",
-							    "description": "user_uri",
+							    "name": "email",
+							    "description": "email",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
-							    "defaultValue" : "${ambit_root}/user/U1",
 							    "allowMultiple": false
 							}														
                     ],
@@ -177,7 +165,7 @@
         }        
     ],
     "models" : {
-      "Protocol" : <#include "/apidocs/json_schema_protocol.ftl" >  ,
+      "User" : <#include "/apidocs/json_schema_user.ftl" >  ,
       "Task" : <#include "/apidocs/json_schema_task.ftl" >  	  
     },    
     <#include "/apidocs/profile/${menu_profile}/info.ftl" >  
