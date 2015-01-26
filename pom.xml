@@ -13,7 +13,7 @@
     <junit.version>4.8.1</junit.version>
     <restlet.version>2.0-M6</restlet.version>
     <modbcum.version>1.0.4</modbcum.version>
-    <restnet.version>1.0.6</restnet.version>
+    <restnet.version>1.0.8-SNAPSHOT</restnet.version>
     <ambit.version>2.7.2</ambit.version>
   </properties>
   <issueManagement>
@@ -476,5 +476,45 @@
         <alert.mail.debug />
       </properties>
     </profile>
+    <profile>
+      <id>opensso</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <aa.opensso>http://opensso.in-silico.ch/opensso/identity</aa.opensso>
+        <aa.policy>http://opensso.in-silico.ch/Pol/opensso-pol</aa.policy>
+      </properties>
+    </profile>
+    <profile>
+      <id>openam</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <aa.opensso>https://openam.in-silico.ch/auth</aa.opensso>
+        <aa.policy>https://openam.in-silico.ch/pol</aa.policy>
+      </properties>
+    </profile>
+    <!--  release build, with AA -->
+    <profile>
+      <id>aa-enabled</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <toxbank.protected>true</toxbank.protected>
+      </properties>
+    </profile>
+    <!--  release build, without AA -->
+    <profile>
+      <id>aa-disabled</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <toxbank.protected>false</toxbank.protected>
+      </properties>
+    </profile>    
   </profiles>
 </project>
