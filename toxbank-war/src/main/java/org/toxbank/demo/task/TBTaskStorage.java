@@ -12,48 +12,49 @@ import net.idea.restnet.c.task.TaskStorage;
 import net.idea.restnet.i.task.ICallableTask;
 import net.idea.restnet.i.task.ITask;
 import net.idea.restnet.i.task.ITaskResult;
-import net.idea.restnet.i.task.Task;
-import net.idea.restnet.i.task.TaskResult;
 
 public class TBTaskStorage extends TaskStorage<String> {
 	protected ScheduledThreadPoolExecutor notificationTimer;
 	protected TBNotifier notifier;
-	
+
 	public TBTaskStorage(String name, Logger log) {
 		super(name, Logger.getLogger(TBTaskStorage.class.getName()));
 		notifier = new TBNotifier();
-		TimerTask notificationTasks  = new TimerTask() {
-			
+		TimerTask notificationTasks = new TimerTask() {
+
 			@Override
 			public void run() {
 				try {
-					//String task = notifier.call();
-					//logger.log(Level.INFO, task);
+					// String task = notifier.call();
+					// logger.log(Level.INFO, task);
 				} catch (Exception x) {
-					logger.log(Level.SEVERE, "Error launching notifications!", x);
+					logger.log(Level.SEVERE, "Error launching notifications!",
+							x);
 				}
-				
+
 			}
 		};
 		notificationTimer = new ScheduledThreadPoolExecutor(1);
-		notificationTimer.scheduleWithFixedDelay(notificationTasks, 0, 12,TimeUnit.HOURS);
+		notificationTimer.scheduleWithFixedDelay(notificationTasks, 0, 12,
+				TimeUnit.HOURS);
 	}
-	
+
 	@Override
 	public synchronized void shutdown(long timeout, TimeUnit unit)
 			throws Exception {
 		if (!notificationTimer.isShutdown()) {
 			notificationTimer.awaitTermination(timeout, unit);
 			notificationTimer.shutdown();
-		}	
+		}
 		super.shutdown(timeout, unit);
 	}
 
 	@Override
 	protected ITask<ITaskResult, String> createTask(String user,
 			ICallableTask callable) {
-	
-		return new PolicyProtectedTask(user,!(callable instanceof CallablePolicyCreator)) {
+
+		return new PolicyProtectedTask(user,
+				!(callable instanceof CallablePolicyCreator)) {
 			@Override
 			public synchronized void setPolicy() throws Exception {
 

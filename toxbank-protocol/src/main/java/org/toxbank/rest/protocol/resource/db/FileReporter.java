@@ -1,7 +1,6 @@
 package org.toxbank.rest.protocol.resource.db;
 
 import java.io.File;
-import java.net.URISyntaxException;
 
 import net.idea.modbcum.i.IQueryRetrieval;
 import net.idea.modbcum.i.exceptions.AmbitException;
@@ -11,8 +10,9 @@ import org.restlet.data.MediaType;
 import org.restlet.representation.FileRepresentation;
 import org.toxbank.rest.protocol.DBProtocol;
 
-
-public class FileReporter extends QueryReporter<DBProtocol, IQueryRetrieval<DBProtocol>, FileRepresentation> {
+public class FileReporter
+		extends
+		QueryReporter<DBProtocol, IQueryRetrieval<DBProtocol>, FileRepresentation> {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class FileReporter extends QueryReporter<DBProtocol, IQueryRetrieval<DBPr
 	public FileReporter() {
 		super();
 	}
-	
+
 	@Override
 	public void header(FileRepresentation output,
 			IQueryRetrieval<DBProtocol> query) {
@@ -37,11 +37,14 @@ public class FileReporter extends QueryReporter<DBProtocol, IQueryRetrieval<DBPr
 	public Object processItem(DBProtocol item) throws Exception {
 		try {
 			File file = new File(item.getDocument().getResourceURL().toURI());
-			FileRepresentation filerepresentation = new FileRepresentation(file, new MediaType(item.getDocument().getMediaType()));
+			FileRepresentation filerepresentation = new FileRepresentation(
+					file, new MediaType(item.getDocument().getMediaType()));
 			int extIndex = file.getName().lastIndexOf(".");
-			if (extIndex>0)
-				filerepresentation.setDownloadName(String.format("%s%s",item.getIdentifier(),file.getName().substring(extIndex)));
-			else filerepresentation.setDownloadName(item.getIdentifier());	
+			if (extIndex > 0)
+				filerepresentation.setDownloadName(String.format("%s%s", item
+						.getIdentifier(), file.getName().substring(extIndex)));
+			else
+				filerepresentation.setDownloadName(item.getIdentifier());
 			setOutput(filerepresentation);
 			return item;
 		} catch (Exception x) {

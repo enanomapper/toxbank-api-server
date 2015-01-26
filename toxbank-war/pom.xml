@@ -6,9 +6,7 @@
     <groupId>org.toxbank</groupId>
     <version>0.0.7-SNAPSHOT</version>
   </parent>
-  <groupId>org.toxbank</groupId>
   <artifactId>toxbank-war</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>ToxBank Web REST services</name>
   <scm>

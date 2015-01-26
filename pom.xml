@@ -14,6 +14,7 @@
     <restlet.version>2.0-M6</restlet.version>
     <modbcum.version>1.0.4</modbcum.version>
     <restnet.version>1.0.6</restnet.version>
+    <ambit.version>2.7.2</ambit.version>
   </properties>
   <issueManagement>
     <system>GitHub</system>
@@ -89,45 +90,38 @@
     <dependency>
     	<groupId>ambit</groupId>
     	<artifactId>opentox-client</artifactId>
-    	<version>2.0.0-SNAPSHOT</version>
+    	<version>2.0.0</version>
     </dependency>
     <dependency>
     	<groupId>ambit</groupId>
     	<artifactId>ambit2-base</artifactId>
-    	<version>2.7.1-SNAPSHOT</version>
+    	<version>${ambit.version}</version>
     </dependency>    
   </dependencies>
   <repositories>
     <repository>
-      <id>maven-restlet</id>
-      <name>Public online Restlet repository</name>
-      <url>http://maven.restlet.org</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>ambit-plovdiv</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/thirdparty</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
       <id>ambit-plovdiv-releases</id>
       <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
     </repository>
     <repository>
       <id>ambit-plovdiv-snapshots</id>
       <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
       <snapshots>
         <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>maven-restlet</id>
+      <name>Public online Restlet repository</name>
+      <url>http://maven.restlet.com</url>
+    </repository>
+    <repository>
+      <id>repo1.maven.org</id>
+      <name>repo1.maven.org</name>
+      <url>http://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
       </snapshots>
     </repository>
     <repository>
@@ -148,14 +142,6 @@
       </releases>
       <snapshots>
         <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>mvnrepository</id>
-      <name>mvnrepository</name>
-      <url>http://mvnrepository.com/</url>
-      <snapshots>
-        <enabled>false</enabled>
       </snapshots>
     </repository>
   </repositories>
