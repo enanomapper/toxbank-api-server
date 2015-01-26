@@ -30,6 +30,6 @@ GRANT execute on procedure `enmprotocol`.createProtocolVersion to guest@localhos
 
 Test DB
 ````
-GRANT ALL ON `enmp-test`.* TO 'guest'@'localhost';
-GRANT execute on procedure `enmp-test`.createProtocolVersion to  guest@localhost;
+GRANT ALL ON `enmp_test`.* TO 'guest'@'localhost';
+GRANT execute on procedure `enmp_test`.createProtocolVersion to  guest@localhost;
 ````

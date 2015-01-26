@@ -416,7 +416,7 @@
 
         <!-- Used in surefire tests only-->
         <!-- Database for tests -->
-        <toxbank.db.test>enmp-test</toxbank.db.test>
+        <toxbank.db.test>enmp_test</toxbank.db.test>
         <!-- DB user for tests -->
         <toxbank.db.user.test>guest</toxbank.db.user.test>
         <!-- DB password for tests -->
