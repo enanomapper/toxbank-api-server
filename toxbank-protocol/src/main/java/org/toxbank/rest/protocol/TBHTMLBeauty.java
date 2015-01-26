@@ -23,17 +23,17 @@ public class TBHTMLBeauty extends HTMLBeauty {
 
 	@Override
 	protected String getHomeURI() {
-		return "http://toxbank.net/";
+		return "http://www.enanomapper.net/";
 	}
 
 	@Override
 	protected String getLogoURI(String root) {
-		return "http://toxbank.github.com/toxbank-api-server/images/toxbank_rgb-72.png";
+		return "https://apps.ideaconsult.net/enanomapper/images/profile/enanomapper/logo.png";
 	}
 
 	@Override
 	public String getTitle() {
-		return "ToxBank protocol web service";
+		return "eNanoMapper protocol web service";
 	}
 
 	public void writeTopLinks(Writer w, String title, Request request,
