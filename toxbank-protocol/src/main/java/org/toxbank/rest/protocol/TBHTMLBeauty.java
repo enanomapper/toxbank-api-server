@@ -110,7 +110,7 @@ public class TBHTMLBeauty extends HTMLBeauty {
 
 		w.write("<span style='float:left;'>");
 		w.write(String
-				.format("<a href=\"%s\"><img src='%s' alt='%s' title='%s' border='0'></a>\n",
+				.format("<a href=\"%s\"><img src='%s' alt='%s' title='%s' border='0' width='164' height='32'></a>\n",
 						getHomeURI(), getLogoURI(baseReference.toString()),
 						getTitle(), baseReference));
 		w.write("</span>\n");
