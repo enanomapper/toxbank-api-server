@@ -173,7 +173,7 @@ public class TBHTMLBeauty extends HTMLBeauty {
 		Reference baseReference = request == null ? null : request.getRootRef();
 		output.write("</div>\n");
 		output.write("<div class='ui-layout-south footer ui-widget-header' style='padding: 1 1 1 1'>\n");
-		output.write("<span style='float:right;' class='ui-button'><a href='http://www.ideaconsult.net'>Developed by Ideaconsult Ltd. (2011-2013)</a></span>");
+		output.write("<span style='float:right;' class='ui-button'><a href='http://www.enanomapper.net' title='This project has received funding from the European Union's Seventh Framework Programme for research, technological development and demonstration under grant agreement no 604134'>eNanoMapper</a></span>");
 		output.write("</div>\n");
 		output.write("\n");
 		output.write(jsGoogleAnalytics() == null ? "" : jsGoogleAnalytics());
