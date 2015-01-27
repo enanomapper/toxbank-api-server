@@ -29,17 +29,17 @@ a.topLinks {
 	height: 40px;
 	width: 18%;
 	left: 82%;
-	bottom: -17px;
+	bottom: 0px;
 	padding: 10px 0 0 0;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: -30px;
+	margin-bottom: -15px;
 	-webkit-border-radius: 20px;
 	-khtml-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 	color: white;
-	background-color: #729203;
+	background-color: #920305;
 	text-align: center;
 }
 
