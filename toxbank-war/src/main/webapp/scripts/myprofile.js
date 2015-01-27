@@ -96,7 +96,18 @@ function defineUsersTable(root,url,selector) {
 				        	});
 				           	return sOut;
 					  }
-					}		
+					},
+	 				{ 
+						  "mDataProp": "id",			
+		 				  "asSorting": [ "asc", "desc" ],
+						  "aTargets": [ 4 ],	
+						  "bSearchable" : true,
+						  "bUseRendered" : false,
+						  "bSortable" : true,
+						  "fnRender" : function(o,val) {
+							  return "<a href='"+root + "/user/" + val + "/protocol'>Protocols</a>";
+						  }
+						},					
 			],
 		"sDom" : '<"help remove-bottom"i><"help"p>Trt<"help"lf>',
 		"bJQueryUI" : true,

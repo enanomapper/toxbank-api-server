@@ -54,9 +54,13 @@ public class ProtocolDBResource<Q extends ReadProtocol> extends FreemarkerQueryR
 	
 	public ProtocolDBResource() {
 		super();
-		setHtmlbyTemplate(false);
+		setHtmlbyTemplate(true);
 	}
 
+	@Override
+	public String getTemplateName() {
+		return "protocols.ftl";
+	}
 	@Override
 	public RepresentationConvertor createConvertor(Variant variant)
 			throws AmbitException, ResourceException {

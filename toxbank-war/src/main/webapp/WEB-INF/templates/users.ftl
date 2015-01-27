@@ -19,7 +19,6 @@ $(document)
 					jQuery("#breadCrumb").jBreadCrumb();
 					jQuery("#welcome").html("Users");		
 					loadHelp("${ambit_root}","users");
-					console.log("${menu_profile}");
 					
 				});
 </script>
@@ -47,6 +46,7 @@ $(document)
 		<th>Name</th>
 		<th>e-mail</th>
 		<th>Affiliation</th>
+		<th>Protocols</th>
 		</tr>
 		</thead>
 		<tbody></tbody>
