@@ -55,7 +55,7 @@ public class TBHTMLBeauty extends HTMLBeauty {
 	}
 
 	private final static String[] css = new String[] {
-			"<link href=\"%s/style/jquery-ui-1.9.1.custom.min.css\" rel=\"stylesheet\" type=\"text/css\">\n",
+			"<link href=\"%s/style/jquery-ui-1.10.4.custom.min.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 			"<link href=\"%s/style/jquery.dataTables.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 			"<link href=\"%s/style/layout-default-latest.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 			"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">" };
