@@ -109,8 +109,11 @@ function defineProtocolsTable(root,url) {
 					  "bUseRendered" : false,
 					  "bSortable" : true,
 					  "fnRender" : function(o,val) {
-						  var sOut = val;
+						  var sOut = "<span style='font-weight:bold'>" + val + "</span>";
 						  sOut += "<br/>"
+						  sOut += "<span style='font-style:italic'>Published: </span>";
+						  sOut += o.aData.published?"Yes":"No";
+						  sOut += "<br/>"						  
 						  sOut += "<a href='"+o.aData.uri +"/document?media=application%2Fpdf' target='_download' title='Click to download the document' >Download</a>";
 						  return sOut;
 					  }
@@ -122,7 +125,7 @@ function defineProtocolsTable(root,url) {
 					  "bUseRendered" : false,
 					  "bSortable" : true,
 					  "fnRender" : function(o,val) {
-						  var sOut = val + "<br/>";
+						  var sOut = val + "<br/><br/>";
 						  try {
 							  if (o.aData.owner["uri"]!=null)
 							  sOut += " <a href='"+o.aData.owner["uri"] + "' target='details'>Owner</a>";
@@ -149,25 +152,26 @@ function defineProtocolsTable(root,url) {
 						  var sOut = "";
 						  try {
 							  if (o.aData.project["uri"]!=null)
-							  sOut += "Project: <a href='"+o.aData.project["uri"] + "' target='details'>"+o.aData.project["name"]+"</a><br/>";
+							  sOut += "<a href='"+o.aData.project["uri"] + "' target='details'>"+o.aData.project["name"]+"</a><br/>";
 						  } catch (err) {}
-						  try {
-							  if (o.aData.organisation["uri"]!=null)
-							  sOut += "Organisation: <a href='"+o.aData.organisation["uri"] + "' target='details'>"+o.aData.organisation["name"]+"</a></br/>";
-						  } catch (err) {}						  
+				  
 						  return sOut;
 					  }
 				},		
-				{ "mDataProp": "published" , "asSorting": [ "asc", "desc" ],
+				{ "mDataProp": "organisation" , "asSorting": [ "asc", "desc" ],
 					  "aTargets": [5 ],	
-					  "sWidth" : "5%",
 					  "bSearchable" : true,
 					  "bUseRendered" : false,
 					  "bSortable" : true,
 					  "fnRender" : function(o,val) {
-						  return val?"Yes":"No";
+						  var sOut = "";
+						  try {
+							  if (o.aData.organisation["uri"]!=null)
+							  sOut += "<a href='"+o.aData.organisation["uri"] + "' target='details'>"+o.aData.organisation["name"]+"</a></br/>";
+						  } catch (err) {}						  
+						  return sOut;
 					  }
-				},					
+				},						
 				{ "mDataProp": "updated" , "asSorting": [ "asc", "desc" ],
 					  "aTargets": [6 ],	
 					  "bSearchable" : true,

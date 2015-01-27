@@ -46,8 +46,8 @@ $(document)
 		<th>Title</th>
 		<th>Status / Owner</th>		
 		<th>Abstract</th>
-		<th>Project/ Organisation </th>		
-		<th>Published</th>
+		<th>Project</th>
+		<th>Organisation </th>
 		<th>Updated</th>
 		
 		<!--
