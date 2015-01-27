@@ -20,6 +20,7 @@ import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Reference;
 import org.restlet.representation.Representation;
+import org.toxbank.rest.protocol.DBProtocol;
 import org.toxbank.rest.protocol.db.template.ReadFilePointers;
 
 public class DataTemplateResourceTest extends ResourceTest {
@@ -33,7 +34,7 @@ public class DataTemplateResourceTest extends ResourceTest {
 	@Override
 	public String getTestURI() {
 		return String.format("http://localhost:%d%s/%s-1-1%s", port,Resources.protocol,
-					STATUS.RESEARCH.getPrefix(),Resources.datatemplate);
+					STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX),Resources.datatemplate);
 	}
 	
 	@Test
@@ -52,7 +53,7 @@ public class DataTemplateResourceTest extends ResourceTest {
 		while ((line = r.readLine())!= null) {
 			Assert.assertEquals(
 					String.format("http://localhost:%d%s/%s-1-1%s",port,Resources.protocol,
-							STATUS.RESEARCH.getPrefix(),Resources.datatemplate)
+							STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX),Resources.datatemplate)
 							, line);
 			count++;
 		}
@@ -123,7 +124,7 @@ public class DataTemplateResourceTest extends ResourceTest {
 		if (!task.isCompletedOK())
 			System.out.println(task.getError());
 		Assert.assertTrue(task.getResult().toString().startsWith(
-							String.format("http://localhost:%d/protocol/%s",port,STATUS.RESEARCH.getPrefix())));
+							String.format("http://localhost:%d/protocol/%s",port,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX))));
 		
 		return task.getResult().toString();
 

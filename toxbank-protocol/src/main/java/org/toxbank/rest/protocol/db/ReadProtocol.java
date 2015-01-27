@@ -840,7 +840,7 @@ public class ReadProtocol  extends AbstractQuery<DBUser, DBProtocol, EQCondition
 			x.printStackTrace();
 			return null;
 		} finally {
-			if (p!=null) p.setIdentifier(String.format("%s-%d-%d", p.getStatus().getPrefix(), p.getID(),p.getVersion()));
+			if (p!=null) p.setIdentifier(String.format("%s-%d-%d", p.getStatus().getPrefix(DBProtocol._PREFIX), p.getID(),p.getVersion()));
 		}
 	}
 	@Override

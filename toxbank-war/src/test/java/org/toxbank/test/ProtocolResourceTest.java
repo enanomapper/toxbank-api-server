@@ -50,7 +50,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 	}
 	@Override
 	public String getTestURI() {
-		return String.format("http://localhost:%d%s/%s-1-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix());
+		return String.format("http://localhost:%d%s/%s-1-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX));
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		int count = 0;
 		while ((line = r.readLine())!= null) {
 			Assert.assertEquals(
-					String.format("http://localhost:%d%s/%s-1-1",port,Resources.protocol,STATUS.RESEARCH.getPrefix())
+					String.format("http://localhost:%d%s/%s-1-1",port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX))
 							, line);
 			count++;
 		}
@@ -87,7 +87,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		ProtocolIO ioClass = new ProtocolIO();
 		List<Protocol> protocols = ioClass.fromJena(model);
 		Assert.assertEquals(1,protocols.size());
-		Assert.assertEquals(String.format("http://localhost:8181/protocol/%s-1-1",STATUS.RESEARCH.getPrefix()),
+		Assert.assertEquals(String.format("http://localhost:8181/protocol/%s-1-1",STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX)),
 					protocols.get(0).getResourceURL().toString());
 		Assert.assertEquals(DBProtocol._PREFIX+"-Protocol-1-1", protocols.get(0).getIdentifier());
 		Assert.assertEquals("Very important protocol", protocols.get(0).getTitle());
@@ -160,7 +160,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		ITable table = 	c.createQueryTable("EXPECTED","SELECT idprotocol,version FROM protocol where idprotocol=1 and version=1");
 		Assert.assertEquals(new BigInteger("1"),table.getValue(0,"idprotocol"));
 		c.close();		
-		String org = String.format("http://localhost:%d%s/%s-1-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix());
+		String org = String.format("http://localhost:%d%s/%s-1-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX));
 		RemoteTask task = testAsyncPoll(new Reference(org),
 				MediaType.TEXT_URI_LIST, null,
 				Method.DELETE);
@@ -181,7 +181,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		Assert.assertEquals(0,table.getRowCount());
 		
 		c.close();		
-		String org = String.format("http://localhost:%d%s/%s-3-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix());
+		String org = String.format("http://localhost:%d%s/%s-3-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX));
 		RemoteTask task = testAsyncPoll(new Reference(org),
 				MediaType.TEXT_URI_LIST, null,
 				Method.DELETE);
@@ -336,7 +336,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 	
 	@Test
 	public void testUpdateEntryFromMultipartWeb() throws Exception {
-		String uri = String.format("http://localhost:%d%s/%s-2-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix());
+		String uri = String.format("http://localhost:%d%s/%s-2-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX));
 		IDatabaseConnection c = getConnection();	
 		ITable table = 	c.createQueryTable("EXPECTED","SELECT idprotocol,version,iduser from protocol_authors p where p.idprotocol=2 and version=1");
 		Assert.assertEquals(1,table.getRowCount());
@@ -363,7 +363,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 	
 	@Test
 	public void testUpdateEntryFromMultipartWeb_noproject() throws Exception {
-		String uri = String.format("http://localhost:%d%s/%s-2-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix());
+		String uri = String.format("http://localhost:%d%s/%s-2-1", port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX));
 		IDatabaseConnection c = getConnection();	
 		ITable table = 	c.createQueryTable("EXPECTED","SELECT idprotocol,version,iduser from protocol_authors p where p.idprotocol=2 and version=1");
 		Assert.assertEquals(1,table.getRowCount());
@@ -536,7 +536,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		if (!task.isCompletedOK())
 			System.out.println(task.getError());
 		Assert.assertTrue(task.getResult().toString().startsWith(
-							String.format("http://localhost:%d/protocol/%s",port,STATUS.RESEARCH.getPrefix())));
+							String.format("http://localhost:%d/protocol/%s",port,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX))));
 		
 		return task.getResult().toString();
 
@@ -548,7 +548,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 	public void testPublish() throws Exception {
 		
 		
-		String uri = String.format("http://localhost:%d%s/%s-2-1/publication", port,Resources.protocol,STATUS.RESEARCH.getPrefix());
+		String uri = String.format("http://localhost:%d%s/%s-2-1/publication", port,Resources.protocol,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX));
 
 		File file = new File(getClass().getClassLoader().getResource("org/toxbank/protocol/protocol-sample.pdf").getFile());
 		
@@ -577,7 +577,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		if (!task.isCompletedOK())
 			System.out.println(task.getError());
 		Assert.assertTrue(task.getResult().toString().startsWith(
-							String.format("http://localhost:%d/protocol/%s",port,STATUS.RESEARCH.getPrefix())));
+							String.format("http://localhost:%d/protocol/%s",port,STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX))));
 		
 		c = getConnection();	
 		table = 	c.createQueryTable("EXPECTED","SELECT * FROM protocol");
@@ -593,7 +593,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		testGet(String.format("http://localhost:%d%s/%s-1-1%s", 
 					port,
 					Resources.protocol,
-					STATUS.RESEARCH.getPrefix(),
+					STATUS.RESEARCH.getPrefix(DBProtocol._PREFIX),
 					Resources.document),
 					MediaType.APPLICATION_PDF);
 	}	
