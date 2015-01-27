@@ -4,7 +4,7 @@ package org.toxbank.rest.protocol;
 import net.toxbank.client.resource.Protocol;
 
 public class DBProtocol extends Protocol {
-
+	public static final String _PREFIX = "SEURAT";
 	/**
 	 * 
 	 */

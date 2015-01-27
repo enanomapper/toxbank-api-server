@@ -25,6 +25,7 @@ import org.restlet.data.Method;
 import org.restlet.data.Reference;
 import org.restlet.data.Status;
 import org.restlet.representation.Representation;
+import org.toxbank.rest.protocol.DBProtocol;
 import org.toxbank.rest.protocol.db.ReadProtocol;
 
 import com.hp.hpl.jena.ontology.OntModel;
@@ -88,7 +89,7 @@ public class ProtocolResourceTest extends ProtectedResourceTest {
 		Assert.assertEquals(1,protocols.size());
 		Assert.assertEquals(String.format("http://localhost:8181/protocol/%s-1-1",STATUS.RESEARCH.getPrefix()),
 					protocols.get(0).getResourceURL().toString());
-		Assert.assertEquals("SEURAT-Protocol-1-1", protocols.get(0).getIdentifier());
+		Assert.assertEquals(DBProtocol._PREFIX+"-Protocol-1-1", protocols.get(0).getIdentifier());
 		Assert.assertEquals("Very important protocol", protocols.get(0).getTitle());
 		Assert.assertNotNull(protocols.get(0).getAbstract());
 		Assert.assertEquals(5,protocols.get(0).getAbstract().indexOf("\u2122")); // TM symbol

@@ -41,7 +41,7 @@ public class DataTemplateResourceTest extends ResourceTest {
 		testGet(getTestURI(),MediaType.TEXT_URI_LIST);
 	}
 	/**
-	 * The URI should be /protocol/SEURAT-Protocol-1-1/datatemplate
+	 * The URI should be /protocol/"+DBProtocol._PREFIX+"-Protocol-1-1/datatemplate
 	 */
 	@Override
 	public boolean verifyResponseURI(String uri, MediaType media, InputStream in)

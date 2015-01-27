@@ -304,7 +304,7 @@ public class ProtocolFactory {
 
 		}
 		// if (protocol.getIdentifier()==null)
-		// protocol.setIdentifier(String.format("SEURAT-%s",UUID.randomUUID()));
+		// protocol.setIdentifier(String.format("%s-%s",DBProtocol._PREFIX,UUID.randomUUID()));
 		return protocol;
 	}
 

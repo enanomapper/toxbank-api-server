@@ -69,24 +69,28 @@ public abstract class DbUnitTest {
 		return p==null?"localhost":
 			("${toxbank.db.host}".equals(p))?"localhost":p;
 	}
-	protected String getDatabase() {
+	protected String getDatabase() throws Exception {
 		loadProperties();
 		String p = properties.getProperty("database.test");
+		if (p==null || p.startsWith("$")) throw new Exception(p);
 		return (p==null)||("${toxbank.db}".equals(p))?"tb-test":p;
 	}
-	protected String getPort() {
+	protected String getPort() throws Exception {
 		loadProperties();
 		String p = properties.getProperty("database.test.port");
+		if (p==null || p.startsWith("$")) throw new Exception(p);		
 		return p==null?"3306":p;		
 	}
-	protected String getUser() {
+	protected String getUser() throws Exception {
 		loadProperties();
 		String p = properties.getProperty("database.user.test");
+		if (p==null || p.startsWith("$")) throw new Exception(p);
 		return (p==null) || ("${toxbank.db.user.test}".equals(p))?"guest":p;			
 	}
-	protected String getPWD() {
+	protected String getPWD() throws Exception {
 		loadProperties();
 		String p = properties.getProperty("database.user.test.password");
+		if (p==null || p.startsWith("$")) throw new Exception(p);
 		return (p==null) || ("${toxbank.db.user.test.password}".equals(p))?"guest":p;	
 	}
 	/*

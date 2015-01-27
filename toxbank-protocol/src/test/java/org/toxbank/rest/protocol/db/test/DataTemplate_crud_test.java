@@ -12,7 +12,7 @@ import org.toxbank.rest.protocol.DBProtocol;
 import org.toxbank.rest.protocol.db.template.UpdateDataTemplate;
 
 public class DataTemplate_crud_test  extends CRUDTest<Object,DBProtocol> {
-	String template = "http://localhost/protocol/SEURAT-Protocol-1-1/dataTemplate";
+	String template = "http://localhost/protocol/"+DBProtocol._PREFIX+"-Protocol-1-1/dataTemplate";
 	
 	@Override
 	protected IQueryUpdate<Object,DBProtocol> createQuery() throws Exception {

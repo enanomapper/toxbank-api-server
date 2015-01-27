@@ -20,6 +20,7 @@ import net.toxbank.client.resource.User;
 
 import org.junit.Test;
 import org.opentox.rest.RestException;
+import org.toxbank.rest.protocol.DBProtocol;
 
 public class SimpleNotificationTestCase {  
   Pattern paramStringPattern = Pattern.compile("\\?mod=([0-9]+)");
@@ -102,11 +103,11 @@ public class SimpleNotificationTestCase {
   }
     
   private String createProtoId(int id, int version) {
-    return "SEURAT-Protocol-" + id + "-" + version;
+    return DBProtocol._PREFIX + "-Protocol-" + id + "-" + version;
   }
 
   private String createInvestigationId(int id) {
-    return "SEURAT-Investigation-" + id;
+    return DBProtocol._PREFIX + "-Investigation-" + id;
   }
 
   private URL createUrl(Protocol proto) throws Throwable {

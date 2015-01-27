@@ -58,6 +58,7 @@ import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.protocol.HttpContext;
 import org.opentox.rest.RestException;
 import org.restlet.data.MediaType;
+import org.toxbank.rest.protocol.DBProtocol;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -339,7 +340,7 @@ public class DefaultAlertNotificationUtility implements AlertNotificationUtility
       throw new RuntimeException("Invalid investigation url: " + urlString);
     }
     String rootUrl = matcher.group(1);
-    String seuratId = "SEURAT-Investigation-" + matcher.group(2);
+    String seuratId = DBProtocol._PREFIX + "-Investigation-" + matcher.group(2);
     
     Model model = ModelFactory.createDefaultModel();
 

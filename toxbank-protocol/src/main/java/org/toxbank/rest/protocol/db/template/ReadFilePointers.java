@@ -77,7 +77,7 @@ public class ReadFilePointers extends AbstractQuery<String, DBProtocol, EQCondit
 			} catch (Exception x) {
 				protocol.setDocument(new Document()); 
 			}			
-			if (protocol!=null) protocol.setIdentifier(String.format("SEURAT-Protocol-%d-%d", protocol.getID(),protocol.getVersion()));
+			if (protocol!=null) protocol.setIdentifier(String.format("%s-Protocol-%d-%d", DBProtocol._PREFIX, protocol.getID(),protocol.getVersion()));
 			return protocol;
 		} catch (Exception x) {
 			return null;
