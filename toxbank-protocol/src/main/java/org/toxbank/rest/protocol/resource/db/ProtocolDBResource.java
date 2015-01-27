@@ -12,7 +12,6 @@ import net.idea.restnet.c.task.CallableProtectedTask;
 import net.idea.restnet.c.task.FactoryTaskConvertor;
 import net.idea.restnet.c.task.TaskCreator;
 import net.idea.restnet.db.DBConnection;
-import net.idea.restnet.db.QueryResource;
 import net.idea.restnet.db.QueryURIReporter;
 import net.idea.restnet.db.convertors.OutputWriterConvertor;
 import net.idea.restnet.db.convertors.RDFJenaConvertor;
@@ -32,6 +31,7 @@ import org.restlet.data.Status;
 import org.restlet.representation.Variant;
 import org.restlet.resource.ResourceException;
 import org.toxbank.rest.FileResource;
+import org.toxbank.rest.FreemarkerQueryResource;
 import org.toxbank.rest.protocol.CallableProtocolUpload;
 import org.toxbank.rest.protocol.DBProtocol;
 import org.toxbank.rest.protocol.db.ReadProtocol;
@@ -45,12 +45,17 @@ import org.toxbank.rest.user.resource.UserDBResource;
  *
  * @param <Q>
  */
-public class ProtocolDBResource<Q extends ReadProtocol> extends QueryResource<Q,DBProtocol> {
+public class ProtocolDBResource<Q extends ReadProtocol> extends FreemarkerQueryResource<Q,DBProtocol> {
 
 	
 	protected boolean singleItem = false;
 	protected boolean version = false;
 	protected boolean editable = true;
+	
+	public ProtocolDBResource() {
+		super();
+		setHtmlbyTemplate(false);
+	}
 
 	@Override
 	public RepresentationConvertor createConvertor(Variant variant)
@@ -174,11 +179,6 @@ public class ProtocolDBResource<Q extends ReadProtocol> extends QueryResource<Q,
 		return new ProtocolQueryURIReporter(getRequest());
 	}
 
-	@Override
-	public String getConfigFile() {
-		return "conf/tbprotocol-db.pref";
-	}
-	
 	@Override
 	protected boolean isAllowedMediaType(MediaType mediaType)
 			throws ResourceException {

@@ -3,17 +3,18 @@ package org.toxbank.rest;
 import java.io.Serializable;
 import java.util.Map;
 
+import net.idea.modbcum.i.IQueryRetrieval;
+import net.idea.restnet.aa.opensso.OpenSSOServicesConfig;
+import net.idea.restnet.aa.opensso.OpenSSOUser;
+import net.idea.restnet.db.QueryResource;
+import net.idea.restnet.i.freemarker.IFreeMarkerApplication;
+
 import org.restlet.Request;
 import org.restlet.data.Form;
 import org.restlet.data.MediaType;
 import org.restlet.data.Reference;
 
 import ambit2.base.config.AMBITConfig;
-import net.idea.modbcum.i.IQueryRetrieval;
-import net.idea.restnet.aa.opensso.OpenSSOServicesConfig;
-import net.idea.restnet.aa.opensso.OpenSSOUser;
-import net.idea.restnet.db.QueryResource;
-import net.idea.restnet.i.freemarker.IFreeMarkerApplication;
 
 public abstract class FreemarkerQueryResource<Q extends IQueryRetrieval<T>, T extends Serializable>
 		extends QueryResource<Q, T> {
@@ -82,5 +83,11 @@ public abstract class FreemarkerQueryResource<Q extends IQueryRetrieval<T>, T ex
 		r.setQuery(query.getQueryString());
 		map.put(AMBITConfig.ambit_request_csv.name(), r.toString());
 
+	}
+	
+
+	@Override
+	public String getConfigFile() {
+		return "conf/tbprotocol-db.pref";
 	}
 }

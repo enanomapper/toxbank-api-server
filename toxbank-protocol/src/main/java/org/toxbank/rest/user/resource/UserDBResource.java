@@ -169,10 +169,6 @@ public class UserDBResource<T> extends FreemarkerQueryResource<ReadUser<T>, DBUs
 		return new UserURIReporter(getRequest());
 	}
 
-	@Override
-	public String getConfigFile() {
-		return "conf/tbprotocol-db.pref";
-	}
 
 	@Override
 	protected CallableProtectedTask<String> createCallable(Method method,

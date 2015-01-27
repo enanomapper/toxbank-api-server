@@ -5,7 +5,6 @@ import net.idea.modbcum.i.exceptions.AmbitException;
 import net.idea.restnet.c.RepresentationConvertor;
 import net.idea.restnet.c.StringConvertor;
 import net.idea.restnet.c.task.FactoryTaskConvertor;
-import net.idea.restnet.db.QueryResource;
 import net.idea.restnet.db.QueryURIReporter;
 import net.idea.restnet.db.convertors.OutputWriterConvertor;
 import net.idea.restnet.db.convertors.RDFJenaConvertor;
@@ -24,6 +23,7 @@ import org.restlet.data.Status;
 import org.restlet.representation.Variant;
 import org.restlet.resource.ResourceException;
 import org.toxbank.rest.FileResource;
+import org.toxbank.rest.FreemarkerQueryResource;
 import org.toxbank.rest.groups.IDBGroup;
 import org.toxbank.rest.groups.db.ReadGroup;
 import org.toxbank.rest.user.DBUser;
@@ -35,11 +35,15 @@ import org.toxbank.rest.user.resource.UserDBResource;
  *
  * @param <Q>
  */
-public abstract class GroupDBResource<G extends IDBGroup>	extends QueryResource<ReadGroup<G>,G> {
+public abstract class GroupDBResource<G extends IDBGroup>	extends FreemarkerQueryResource<ReadGroup<G>,G> {
 	public static final String resourceKey = "key";
 	
 	protected boolean singleItem = false;
 	protected boolean editable = true;
+	public GroupDBResource() {
+		super();
+		setHtmlbyTemplate(false);
+	}
 
 	@Override
 	public RepresentationConvertor createConvertor(Variant variant)
@@ -151,10 +155,6 @@ public abstract class GroupDBResource<G extends IDBGroup>	extends QueryResource<
 		return new GroupQueryURIReporter(getRequest());
 	}
 
-	@Override
-	public String getConfigFile() {
-		return "conf/tbprotocol-db.pref";
-	}
 	
 	@Override
 	protected boolean isAllowedMediaType(MediaType mediaType)
