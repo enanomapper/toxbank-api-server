@@ -77,9 +77,94 @@
                     ]
                 },
                 {
+                    "method": "PUT",
+                    "summary": "Update Protocol metadata",
+                    "notes": "Update Protocol metadata <a href='http://api.toxbank.net/index.php/Protocol' target='opentox'>Protocol API</a>",
+                    "type": "Task",
+                    "nickname": "setProtocolByID",
+                     <#include "/apidocs/authz.ftl" >
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Protocol identifier",
+                            "required": false,
+                            "type": "string",
+                            "paramType": "path",
+                            "allowMultiple": false
+                        },
+                        {
+						    "name": "title",
+						    "description": "title",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						    "allowMultiple": false
+						},	
+						                   							{
+						    "name": "anabstract",
+						    "description": "abstract",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						    "allowMultiple": false
+						},
+						{
+						    "name": "author_uri",
+						    "description": "author_uri",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						     "defaultValue" : "${ambit_root}/user/U1",
+						    "allowMultiple": true
+						},
+						{
+						    "name": "keywords",
+						    "description": "keywords",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						    "allowMultiple": true
+						},
+						{
+						    "name": "summarySearchable",
+						    "description": "is summary searchable",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						    "allowMultiple": false
+						},		
+						{
+						    "name": "project_uri",
+						    "description": "Project URI",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						     "defaultValue" : "${ambit_root}/project/G1",
+						    "allowMultiple": true
+						},	
+						{
+						    "name": "organisation_uri",
+						    "description": "Organisation URI",
+						    "required": false,
+						    "type": "string",
+						    "paramType": "form",
+						    "defaultValue" : "${ambit_root}/organisation/G1",
+						    "allowMultiple": false
+						}						
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 404,
+                            "message": "Task not found"
+                        },
+                        <#include "/apidocs/error_task.ftl" >,                                   
+						<#include "/apidocs/error_500.ftl" >	     
+                    ]
+                },     
+                {
                     "method": "POST",
-                    "summary": "Retrieve Metadata of a single Protocol",
-                    "notes": "Retrieve Metadata of a single Protocol <a href='http://opentox.org/dev/apis/api-1.2/AsyncTask' target='opentox'>Protocol API</a>",
+                    "summary": "Upload a new Protocol",
+                    "notes": "Upload a new Protocol <a href='http://api.toxbank.net/index.php/Protocol' target='opentox'>Protocol API</a>",
                     "type": "Task",
                     "nickname": "uploadProtocol",
 					"consumes": [
@@ -93,7 +178,7 @@
 							    "required": true,
 							    "type": "File",
 							    "paramType": "form",
-							    "allowMultiple": true
+							    "allowMultiple": false
 							},
 							{
 							    "name": "title",
@@ -130,7 +215,7 @@
 							},
 							{
 							    "name": "summarySearchable",
-							    "description": "summarySearchable",
+							    "description": "is summary searchable",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
@@ -138,7 +223,7 @@
 							},		
 							{
 							    "name": "project_uri",
-							    "description": "project_uri",
+							    "description": "Project URI",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
@@ -147,7 +232,7 @@
 							},	
 							{
 							    "name": "organisation_uri",
-							    "description": "organisation_uri",
+							    "description": "Organisation URI",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
@@ -156,7 +241,7 @@
 							},	
 							{
 							    "name": "user_uri",
-							    "description": "user_uri",
+							    "description": "Owner user URI",
 							    "required": true,
 							    "type": "string",
 							    "paramType": "form",
