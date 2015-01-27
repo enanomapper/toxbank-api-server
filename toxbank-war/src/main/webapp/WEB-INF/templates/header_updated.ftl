@@ -73,16 +73,17 @@
     <link rel="stylesheet" href="${ambit_root}/style/sm-core-css.css" type="text/css">
     <link rel="stylesheet" href="${ambit_root}/style/sm-mint.css" type="text/css">
      
-<!-- Uncomment to enable the confirmation message when clicking external links	
+<!-- Uncomment to enable the confirmation message when clicking external links -->	
 <script type='text/javascript'>
 	$(document).ready(function() {
 		$(".qxternal").click(function(event) {
-		   var confirmation = confirm("You are leaving the AMBIT2 website and entering an external link.");
+		   var confirmation = confirm("You are leaving the eNanoMapper website and entering an external link.");
 		   if (!confirmation) {
 		     event.preventDefault();
 		   }
 		 });
 	});
  </script>
+ <!--   
  -->
  <#include "/ga.ftl" >
