@@ -1,6 +1,6 @@
 #The Java ToxBank API Protocol service software.
 
-There are maven profiles  -P toxbank and -P enm
+There are maven profiles  -P toxbank and -P enm for [ToxBank](http://www.toxbank.net) and [eNanoMapper](http://www.enanomapper.net) protocol services, respectively.
 
 The tests assume 
 
