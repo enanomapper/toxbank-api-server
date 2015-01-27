@@ -22,7 +22,7 @@
 
 <li>
 	<a href="${ambit_root}/help">Help</a>
-	<#include "/menu/profile/default/help_menu.ftl">
+	<#include "/menu/profile/enm/help_menu.ftl">
 </li>				
 </ul>
 

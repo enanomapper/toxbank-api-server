@@ -18,7 +18,9 @@ $(document)
 					jQuery("#breadCrumb ul").append('<li><a href="${ambit_root}/user" title="users">Users</a></li>');
 					jQuery("#breadCrumb").jBreadCrumb();
 					jQuery("#welcome").html("Users");		
-					loadHelp("${ambit_root}","task");
+					loadHelp("${ambit_root}","users");
+					console.log("${menu_profile}");
+					
 				});
 </script>
 
