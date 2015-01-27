@@ -3,6 +3,10 @@
 	<ul>
 		<li><a href='${ambit_root}/api-docs' target=_blank title="API documentation in Swagger JSON format">API Documentation</a></li>
 	</ul>
+	<ul>
+		<li><a href='http://enanomapper.github.io/API/' target=_blank title="API documentation in Swagger JSON format">API Documentation (eNanoMapper services)</a></li>
+	</ul>
+	
 	</li>
 	<li><a href="#">About</a>
 		<ul>
