@@ -1,4 +1,4 @@
-package org.toxbank.demo;
+package org.toxbank.rest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -26,7 +26,7 @@ import org.restlet.service.StatusService;
 
 import ambit2.base.config.AMBITConfig;
 
-public class TBRESTStatusService extends StatusService implements
+public class FreeMarkerStatusService extends StatusService implements
 		IFreeMarkerSupport {
 	protected transient Logger logger = Logger.getLogger(getClass().getName());
 	protected IFreeMarkerSupport freeMarkerSupport = new FreeMarkerSupport();
@@ -38,7 +38,7 @@ public class TBRESTStatusService extends StatusService implements
 		production, debug
 	}
 
-	public TBRESTStatusService(FreeMarkerApplication app, REPORT_LEVEL level) {
+	public FreeMarkerStatusService(FreeMarkerApplication app, REPORT_LEVEL level) {
 		super();
 		this.app = app;
 		setHtmlbyTemplate(true);
@@ -92,6 +92,13 @@ public class TBRESTStatusService extends StatusService implements
 		map.put("status_error_name", errName);
 		map.put("status_error_description", errDescription);
 		map.put("status_details", details);
+		
+		map.put(AMBITConfig.ambit_version_short.name(), app.getVersionShort());
+		map.put(AMBITConfig.ambit_version_long.name(), app.getVersionLong());
+		map.put(AMBITConfig.googleAnalytics.name(), app.getGACode());
+		map.put(AMBITConfig.menu_profile.name(), app.getProfile());
+
+		
 		configureTemplateMap(map, request, app);
 		return toRepresentation(map, getTemplateName(), MediaType.TEXT_PLAIN);
 	}

@@ -44,6 +44,7 @@ import org.toxbank.demo.task.TBAdminRouter;
 import org.toxbank.demo.task.TBTaskResource;
 import org.toxbank.demo.task.TBTaskRouter;
 import org.toxbank.demo.task.TBTaskStorage;
+import org.toxbank.rest.FreeMarkerStatusService;
 import org.toxbank.rest.groups.OrganisationRouter;
 import org.toxbank.rest.groups.ProjectRouter;
 import org.toxbank.rest.protocol.ProtocolRouter;
@@ -96,7 +97,8 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		 * ,logFile.getAbsolutePath());
 		 */
 
-		setStatusService(new TBRESTStatusService());
+		// setStatusService(new TBRESTStatusService());
+		setStatusService(new FreeMarkerStatusService(this,getStatusReportLevel()));
 		setTunnelService(new TunnelService(true, true) {
 			@Override
 			public Filter createInboundFilter(Context context) {
@@ -654,12 +656,29 @@ public class TBApplication extends FreeMarkerApplication<String> {
 		return originFilter;
 	}
 
-	
 	public synchronized String getMenuProfile() {
-		String prefix = getProperty("ambit.profile",protocolProperties);
-		if (prefix == null || "".equals(prefix) || prefix.contains("${")) prefix = "default";
+		String prefix = getProperty("ambit.profile", protocolProperties);
+		if (prefix == null || "".equals(prefix) || prefix.contains("${"))
+			prefix = "default";
 		return prefix;
 	}
+	
+	/**
+	 * Reads the status report level from ambit.pref ${ambit.report.level}
+	 * If debug the status will include the stack trace 
+	 * @return
+	 */
+	   	protected FreeMarkerStatusService.REPORT_LEVEL getStatusReportLevel() {
+			try {
+				FreeMarkerStatusService.REPORT_LEVEL aa = FreeMarkerStatusService.REPORT_LEVEL.valueOf(getProperty(FreeMarkerStatusService.report_level,protocolProperties));
+				if ((getContext()!=null) && 
+					(getContext().getParameters()!=null) && 
+					(getContext().getParameters().getFirstValue(FreeMarkerStatusService.report_level))!=null)
+					aa = FreeMarkerStatusService.REPORT_LEVEL.valueOf(getContext().getParameters().getFirstValue(FreeMarkerStatusService.report_level));
+				return aa;
+			} catch (Exception x) {	}
+			return FreeMarkerStatusService.REPORT_LEVEL.production;
+		}
 }
 
 class OpenSSOAuthorizerRIAP extends OpenSSOAuthorizer {
