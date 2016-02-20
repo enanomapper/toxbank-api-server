@@ -108,7 +108,6 @@
       <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
       <snapshots>
         <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
     <repository>
