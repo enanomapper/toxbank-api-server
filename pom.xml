@@ -230,14 +230,15 @@
 -->
   </modules>
   <distributionManagement>
+    <snapshotRepository>
+      <id>toxbank-snapshots</id>
+      <url>https://nexus.ideaconsult.net/content/repositories/toxbank-snapshots</url>
+    </snapshotRepository>
    <repository>
         <id>toxbank-releases</id>
         <url>https://nexus.ideaconsult.net/content/repositories/toxbank-releases</url>
     </repository>
-    <repository>
-        <id>toxbank-snapshots</id>
-        <url>https://nexus.ideaconsult.net/content/repositories/toxbank-snapshots</url>
-    </repository>
+    
   </distributionManagement>
   <ciManagement>
     <url>http://jenkins.toxbank.net</url>
