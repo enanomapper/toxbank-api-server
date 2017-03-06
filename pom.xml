@@ -100,16 +100,18 @@
   </dependencies>
   <repositories>
     <repository>
-      <id>ambit-plovdiv-releases</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
+        <id>nexus-idea</id>
+        <url>https://nexus.ideaconsult.net/content/repositories/thirdparty</url>
+    </repository>
+   <repository>
+        <id>nexus-idea-releases</id>
+        <url>https://nexus.ideaconsult.net/content/repositories/releases</url>
     </repository>
     <repository>
-      <id>ambit-plovdiv-snapshots</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+        <id>nexus-idea-snapshots</id>
+        <url>https://nexus.ideaconsult.net/content/repositories/snapshots</url>
     </repository>
+  
     <repository>
       <id>maven-restlet</id>
       <name>Public online Restlet repository</name>
