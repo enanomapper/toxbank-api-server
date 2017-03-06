@@ -125,26 +125,7 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-    <repository>
-      <id>toxbank-snapshots</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>toxbank-releases</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
+
   </repositories>
   <organization>
     <name>IdeaConsult Ltd</name>
@@ -249,20 +230,14 @@
 -->
   </modules>
   <distributionManagement>
-    <snapshotRepository>
-      <id>toxbank-snapshots</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>toxbank-releases</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/toxbank-releases</url>
+   <repository>
+        <id>toxbank-releases</id>
+        <url>https://nexus.ideaconsult.net/content/repositories/toxbank-releases</url>
     </repository>
-    <!--
-    <site>
-      <id>toxbank-site</id>
-      <url>http://toxbank.github.com/toxbank-api-server/</url>
-    </site>
--->
+    <repository>
+        <id>toxbank-snapshots</id>
+        <url>https://nexus.ideaconsult.net/content/repositories/toxbank-snapshots</url>
+    </repository>
   </distributionManagement>
   <ciManagement>
     <url>http://jenkins.toxbank.net</url>
