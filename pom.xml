@@ -13,7 +13,7 @@
     <junit.version>4.8.1</junit.version>
     <restlet.version>2.0-M6</restlet.version>
     <modbcum.version>1.0.4</modbcum.version>
-    <restnet.version>1.0.8-SNAPSHOT</restnet.version>
+    <restnet.version>1.0.8</restnet.version>
     <ambit.version>2.7.2</ambit.version>
   </properties>
   <issueManagement>
